@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>com.nhnacademy</groupId>
-    <artifactId>trace-logger-module</artifactId>
+    <artifactId>trace-logger</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>trace-logger-module</name>
+    <name>trace-logger</name>
     <description>공통 traceId 흐름 로거 모듈</description>
 
     <properties>
