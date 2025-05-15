@@ -1,5 +1,7 @@
 package com.nhnacademy.traceloggermodule.logging;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 
@@ -14,15 +16,14 @@ import net.logstash.logback.argument.StructuredArguments;
 @Slf4j
 public class FlowLogger {
 
-    public static void log(String target, Map<String, Object> data) {
-        log.info("flow-trace",
-                StructuredArguments.entries(Map.of(
-                        "traceId", MDC.get("traceId"),
-                        "source", MDC.get("source"),
-                        "target", target,
-                        "timestamp", Instant.now().toString(),
-                        "extra", data
-                ))
+    public static void log(String target, Object payload) {
+        Map<String, Object> flow = Map.of(
+                "traceId", MDC.get("traceId"),
+                "source", MDC.get("source"),
+                "target", target,
+                "@timestamp", Instant.now().toString()
         );
+
+        log.info("trace-flow", StructuredArguments.entries(flow));
     }
 }
