@@ -19,19 +19,14 @@ import java.util.Map;
 @Component
 @Slf4j
 public class FlowLoggingAspect {
-
     @Before("execution(* com.nhnacademy..*Controller.*(..)) || execution(* com.nhnacademy..*Service.*(..))")
-    public void logFlow(JoinPoint joinPoint) {
-        String className = joinPoint.getSignature().getDeclaringTypeName();
-        String method = joinPoint.getSignature().getName();
-
-        Map<String, Object> logData = Map.of(
+    public void logFlow(JoinPoint jp) {
+        Map<String,Object> m = Map.of(
                 "traceId", MDC.get("traceId"),
-                "source", MDC.get("source"),
-                "target", className + "#" + method,
+                "source",  MDC.get("source"),
+                "target",  jp.getSignature().getDeclaringTypeName() + "#" + jp.getSignature().getName(),
                 "timestamp", Instant.now().toString()
         );
-
-        log.info("{}", logData);
+        log.info("{}", m);
     }
 }
