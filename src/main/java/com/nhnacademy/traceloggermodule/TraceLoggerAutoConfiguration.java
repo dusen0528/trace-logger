@@ -2,6 +2,7 @@ package com.nhnacademy.traceloggermodule;
 
 import com.nhnacademy.traceloggermodule.config.TraceIdFilter;
 import com.nhnacademy.traceloggermodule.logging.FlowLoggingAspect;
+import com.nhnacademy.traceloggermodule.logging.ResponseTimeAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +23,9 @@ public class TraceLoggerAutoConfiguration {
     public FlowLoggingAspect flowLoggingAspect() {
         return new FlowLoggingAspect();
     }
-}
 
+    @Bean
+    public ResponseTimeAspect responseTimeAspect() {
+        return new ResponseTimeAspect();
+    }
+}
