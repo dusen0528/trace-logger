@@ -1,6 +1,7 @@
 package com.nhnacademy.traceloggermodule.logging;
 
 import lombok.extern.slf4j.Slf4j;
+import net.logstash.logback.argument.StructuredArguments;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -60,7 +61,7 @@ public class ResponseTimeAspect {
             );
 
             // JSON 형태로 로그 기록
-            log.info("{}", m);
+            log.info("{}", StructuredArguments.entries(m));
             // MDC.clear()는 TraceIdFilter에서 처리하므로 여기서는 호출하지 않음
         }
     }
