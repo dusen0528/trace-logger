@@ -21,12 +21,9 @@ import java.util.Map;
 public class FlowLoggingAspect {
     @Before("execution(* com.nhnacademy..*Controller.*(..)) || execution(* com.nhnacademy..*Service.*(..))")
     public void logFlow(JoinPoint jp) {
-        Map<String,Object> m = Map.of(
-                "traceId", MDC.get("traceId"),
-                "source",  MDC.get("source"),
-                "target",  jp.getSignature().getDeclaringTypeName() + "#" + jp.getSignature().getName(),
-                "timestamp", Instant.now().toString()
+        FlowLogger.log(
+                jp.getSignature().toShortString(),
+                null  // payload 없으면 null
         );
-        log.info("{}", m);
     }
 }
