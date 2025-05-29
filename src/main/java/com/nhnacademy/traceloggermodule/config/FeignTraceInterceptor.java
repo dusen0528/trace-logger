@@ -5,14 +5,11 @@ import feign.RequestTemplate;
 import org.slf4j.MDC;
 
 /**
- * OpenFeign 요청 시
- * MDC의 traceId, source를 HTTP 헤더로 전파하는 인터셉터.
+ * 🌐 OpenFeign 요청 시
+ * MDC의 traceId, source를 HTTP 헤더에 전파합니다.
  */
 public class FeignTraceInterceptor implements RequestInterceptor {
 
-    /**
-     * @param template Feign RequestTemplate에 trace 헤더를 추가
-     */
     @Override
     public void apply(RequestTemplate template) {
         String traceId = MDC.get("traceId");

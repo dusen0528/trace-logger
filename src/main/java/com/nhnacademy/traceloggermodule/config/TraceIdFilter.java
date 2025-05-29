@@ -7,13 +7,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.UUID;
 
 /**
- * 모든 HTTP 요청에 대해
- * MDC에 traceId, source(서비스명)를 주입하고
- * 응답 헤더에 X-Trace-Id를 설정하는 필터.
+ *   HTTP 요청에 한해 동작하는 Filter.
+ * - 요청 헤더 'X-Trace-Id'가 있으면 재사용, 없으면 새로 생성
+ * - MDC에 traceId, source(서비스명) 주입
+ * - 응답 헤더에도 X-Trace-Id 설정
+ * - HTTP 요청 종료 시 MDC.clear()로 클리어
  */
 public class TraceIdFilter extends OncePerRequestFilter {
 
