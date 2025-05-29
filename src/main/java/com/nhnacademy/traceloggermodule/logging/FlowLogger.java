@@ -8,7 +8,7 @@ import java.util.Map;
 import net.logstash.logback.argument.StructuredArguments;
 
 /**
- * ✍  AOP 외의 커스텀 위치에서도 흐름 로그를 남기고자 할 때 사용하는 유틸 클래스
+ *   AOP 외의 커스텀 위치에서도 흐름 로그를 남기고자 할 때 사용하는 유틸 클래스
  * - 예: 메시지 큐 소비, 비동기 스레드 등
  */
 @Slf4j
