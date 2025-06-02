@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  *  HTTP가 아닌 호출(예: MQTT, 스케줄러 등)에서도
  * 모든 서비스 메서드 진입 시점에
- * MDC에 traceId, source(서비스명)를 자동 주입하는 AOP Aspect.
+ * MDC에 traceId, source(서비스명), time을 자동 주입하는 AOP Aspect.
  * 이후에 Flow/ResponseTime Aspect가 동작합니다.
  */
 @Aspect
@@ -25,7 +25,7 @@ public class TraceIdAspect {
 
     /**
      * 서비스/컨트롤러 패키지 내 모든 public 메서드 실행 전
-     * traceId, source를 MDC에 주입합니다.
+     * traceId, source, time을 MDC에 주입합니다.
      */
     @Before("execution(* com.nhnacademy..*Service.*(..)) "
             + "|| execution(* com.nhnacademy..*Controller.*(..))")
@@ -33,6 +33,7 @@ public class TraceIdAspect {
         String traceId = UUID.randomUUID().toString();
         MDC.put("traceId", traceId);
         MDC.put("source", serviceName);
+        MDC.put("time", String.valueOf(System.currentTimeMillis()));
     }
 
     /**
