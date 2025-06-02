@@ -47,6 +47,8 @@
         </encoder>
     </appender>
 
+    <logger name="com.nhnacademy.traceloggermodule" level="INFO"/>
+
     <root level="INFO">
         <appender-ref ref="JSON_FILE"/>
         <appender-ref ref="JSON_CONSOLE"/>
