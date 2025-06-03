@@ -24,7 +24,7 @@ public class DynamicLogbackLoader {
     public void loadLogback() {
         try {
             LoggerContext context = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
-            context.reset(); // 기존 설정 제거
+            context.reset();
 
             context.putProperty("LOG_PATH", logPath); // 변수 설정
 

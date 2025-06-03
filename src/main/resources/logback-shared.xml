@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <logger name="sun.rmi" level="WARN"/>
+    <logger name="javax.management.remote.rmi" level="WARN"/>
+    <logger name="javax.management" level="WARN"/>
 
     <springProperty name="LOG_PATH" source="logging.file.path" defaultValue="./logs"/>
 
