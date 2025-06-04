@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 
 /**
  * Controller/Service 진입 시
@@ -11,6 +12,7 @@ import org.aspectj.lang.annotation.Before;
  */
 @Aspect
 @Slf4j
+@Order(1)
 public class FlowLoggingAspect {
 
     @Before("execution(* com.nhnacademy..*Controller.*(..)) "

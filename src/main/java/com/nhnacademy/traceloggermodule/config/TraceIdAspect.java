@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -18,6 +19,7 @@ import java.util.UUID;
  */
 @Aspect
 @Component
+@Order(0)
 public class TraceIdAspect {
 
     @Value("${spring.application.name}")

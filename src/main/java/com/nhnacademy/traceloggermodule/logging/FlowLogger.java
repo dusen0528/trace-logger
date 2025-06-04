@@ -14,18 +14,19 @@ import java.util.Map;
 @Slf4j
 public class FlowLogger {
 
-    /**
-     * @param target  호출 지점 식별자 (e.g. Class#method)
-     * @param payload 선택적 페이로드 객체 (null 가능)
-     */
     public static void log(String target, Object payload) {
-        Map<String, Object> flow = Map.of(
-                "traceId", MDC.get("traceId"),
-                "source", MDC.get("source"),
-                "target", target,
-                "@timestamp", Instant.now().toString(),
-                "payload", payload
-        );
+        String traceId = MDC.get("traceId");
+        String source  = MDC.get("source");
+
+        Map<String, Object> flow = new java.util.HashMap<>();
+        flow.put("traceId", traceId != null ? traceId : "MISSING");
+        flow.put("source", source != null ? source : "MISSING");
+        flow.put("target", target);
+        flow.put("@timestamp", Instant.now().toString());
+        if (payload != null) {
+            flow.put("payload", payload);
+        }
+
         log.info("trace-flow", StructuredArguments.entries(flow));
     }
 }
