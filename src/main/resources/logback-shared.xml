@@ -3,16 +3,11 @@
     <logger name="sun.rmi" level="WARN"/>
     <logger name="javax.management.remote.rmi" level="WARN"/>
     <logger name="javax.management" level="WARN"/>
+    <logger name="org.eclipse.paho" level="WARN"/>
+    <logger name="com.nhnacademy.traceloggermodule" level="DEBUG"/>
 
     <springProperty name="LOG_PATH" source="logging.file.path" defaultValue="./logs"/>
 
-    <!-- MQTT 클라이언트는 경고 이상만 출력 -->
-    <logger name="org.eclipse.paho" level="WARN"/>
-
-    <!-- 트레이스 로거 모듈 로그 출력 허용 -->
-    <logger name="com.nhnacademy.traceloggermodule" level="INFO"/>
-
-    <!-- 파일 로그 -->
     <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/app.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -32,32 +27,19 @@
                 <loggerName/>
                 <threadName/>
                 <message/>
+                <stackTrace/>
             </providers>
         </encoder>
     </appender>
 
-    <!-- 콘솔 로그 -->
-    <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp timeZone="Asia/Seoul"/>
-                <mdc>
-                    <includeMdcKeyName>traceId</includeMdcKeyName>
-                    <includeMdcKeyName>source</includeMdcKeyName>
-                    <includeMdcKeyName>messageId</includeMdcKeyName>
-                </mdc>
-                <logstashMarkers/>
-                <arguments/>
-                <loggerName/>
-                <threadName/>
-                <message/>
-            </providers>
+    <appender name="DEV_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%highlight(%-5level)] [%cyan(%thread)] %green(%logger{36}) - %msg%n%throwable</pattern>
         </encoder>
     </appender>
 
-    <!-- 최종 루트 로그 연결 -->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="JSON_FILE"/>
-        <appender-ref ref="JSON_CONSOLE"/>
+        <appender-ref ref="DEV_CONSOLE"/>
     </root>
 </configuration>
