@@ -37,9 +37,11 @@ src/main/java/com/nhnacademy/traceloggermodule
 <dependency>
   <groupId>com.github.dusen0528</groupId>
   <artifactId>trace-logger-module</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0</version> 
 </dependency>
 ```
+
+* 버전의 경우 https://jitpack.io/#dusen0528/trace-logger <-- 확인 가능합니다 *
 
 ### 2. application.properties 설정
 서비스 이름을 로그의 `source` 필드로 사용하므로 반드시 `spring.application.name` 값을 지정합니다.
